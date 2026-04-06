@@ -1,5 +1,6 @@
-package com.example.taskmanager;
+package com.example.taskmanager.Services;
 
+import com.example.taskmanager.Repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
