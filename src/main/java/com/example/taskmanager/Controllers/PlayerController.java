@@ -17,7 +17,7 @@ public class PlayerController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<String>> getAllStudents(){
+    public ResponseEntity<List<String>> getAllPlayers(){
         return ResponseEntity.ok(playerService.getAllPlayers());
     }
 
@@ -33,4 +33,8 @@ public class PlayerController {
         return result ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/{ID}/{name}")
+    public ResponseEntity<String> addPlayer (@PathVariable int ID, @PathVariable String name){
+        return ResponseEntity.status(201).body(playerService.addPlayer(ID,name));
+    }
 }

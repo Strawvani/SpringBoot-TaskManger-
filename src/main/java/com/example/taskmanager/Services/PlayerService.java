@@ -26,4 +26,8 @@ public class PlayerService {
     public boolean removePlayer(int ID){
         return playerRepository.deleteByID(ID);
     }
+
+    public String addPlayer (int ID, String name){
+        return playerRepository.add(ID,name);
+    }
 }

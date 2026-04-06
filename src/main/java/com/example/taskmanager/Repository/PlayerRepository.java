@@ -30,4 +30,9 @@ public class PlayerRepository {
     public boolean deleteByID(int ID){
         return players.remove(ID) != null;
     }
+
+    public String add(int ID, String name){
+        players.put(ID,name);
+        return name + " Successfully added!";
+    }
 }
