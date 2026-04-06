@@ -1,9 +1,12 @@
 package com.example.taskmanager;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Repository
 public class PlayerRepository {
     private HashMap<Integer,String>players = new HashMap<>();
 

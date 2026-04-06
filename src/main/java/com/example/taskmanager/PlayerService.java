@@ -1,10 +1,13 @@
 package com.example.taskmanager;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class PlayerService {
 
-    final PlayerRepository playerRepository;
+    private final PlayerRepository playerRepository;
 
 
     public PlayerService(PlayerRepository playerRepository) {
