@@ -1,11 +1,12 @@
 package com.example.taskmanager.Controllers;
 
 import com.example.taskmanager.Services.PlayerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RequestMapping("/api/players")
 @RestController
 public class PlayerController {
 
@@ -15,10 +16,21 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/api/players")
-    public List<String> getAllStudents(){
-        return playerService.getAllPlayers();
+    @GetMapping()
+    public ResponseEntity<List<String>> getAllStudents(){
+        return ResponseEntity.ok(playerService.getAllPlayers());
     }
 
+    @GetMapping("/{ID}")
+    public ResponseEntity<String> getPLayer(@PathVariable int ID){
+        String result = playerService.getPlayer(ID);
+        return result != null ? ResponseEntity.ok(result) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{ID}")
+    public ResponseEntity<Void> removePLayer(@PathVariable int ID){
+        boolean result = playerService.removePlayer(ID);
+        return result ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
 
 }

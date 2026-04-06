@@ -26,4 +26,8 @@ public class PlayerRepository {
     public String findByID(int ID){
         return players.get(ID);
     }
+
+    public boolean deleteByID(int ID){
+        return players.remove(ID) != null;
+    }
 }
