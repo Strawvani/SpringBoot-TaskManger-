@@ -1,9 +1,11 @@
 package com.example.taskmanager.Controllers;
 
+import com.example.taskmanager.Models.Task;
 import com.example.taskmanager.Services.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -16,24 +18,24 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<String> getAllTasks() {
+    public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @GetMapping("/{index}")
-    public ResponseEntity<String> getTask(@PathVariable int index) {
-        String task = taskService.getTask(index);
+    public ResponseEntity<Task> getTask(@PathVariable int index) {
+        Optional<Task> task = taskService.getTaskById(index);
 
         if (task == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(task);
+        return ResponseEntity.ok(task.get());
     }
 
     @PostMapping
-    public ResponseEntity<String> addTask(@RequestBody String task) {
-        String created = taskService.addTask(task);
+    public ResponseEntity<Task> addTask(@RequestBody Task task) {
+        Task created = taskService.createTask(task.getTitle(), task.getDescription());
         return ResponseEntity.status(201).body(created);
     }
 

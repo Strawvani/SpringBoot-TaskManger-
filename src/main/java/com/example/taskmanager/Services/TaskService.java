@@ -1,35 +1,35 @@
 package com.example.taskmanager.Services;
 
+import com.example.taskmanager.Models.Task;
+import com.example.taskmanager.Repository.TaskRepository;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
-    private final List<String> tasks = new ArrayList<>();
 
-    public List<String> getAllTasks() {
-        return tasks;
+    private final TaskRepository taskRepository;
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
     }
 
-    public String getTask(int index) {
-        if (index < 0 || index >= tasks.size()) {
-            return null;
-        }
-        return tasks.get(index);
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
 
-    public String addTask(String task) {
-        tasks.add(task);
-        return task;
+    public Optional<Task> getTaskById(int id) {
+        return taskRepository.findById(id);
     }
 
-    public boolean deleteTask(int index) {
-        if (index < 0 || index >= tasks.size()) {
-            return false;
-        }
-        tasks.remove(index);
-        return true;
+    public Task createTask(String title, String description) {
+        Task task = new Task(0, title, description);
+        return taskRepository.save(task);
+    }
+
+    public boolean deleteTask(int id) {
+        return taskRepository.deleteById(id);
     }
 }
-
