@@ -39,7 +39,7 @@ public class BookService {
             return "Book with ID: " + " Already Exist.";
         }
         bookRepository.add(ID,book);
-        return book.getTitle() + " Successfully Added";
+        return "Created: " + book.getTitle() + " by " + book.getAuthor();
     }
 
 }
