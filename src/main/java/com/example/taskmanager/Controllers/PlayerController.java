@@ -36,5 +36,5 @@ public class PlayerController {
     @PostMapping("/{ID}/{name}")
     public ResponseEntity<String> addPlayer (@PathVariable int ID, @PathVariable String name){
         return ResponseEntity.status(201).body(playerService.addPlayer(ID,name));
-    }
+    }   
 }
